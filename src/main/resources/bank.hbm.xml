@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='utf-8'?>
+<!DOCTYPE hibernate-mapping PUBLIC
+        "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+
+    <class name="Tables.Account" table="accounts">
+        <id name="accountNumber" column="accountNumber" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <many-to-one name="client" column="clientNum" class="Tables.Client" lazy="false"/>
+        <property name="money" column="money" type="java.lang.Double"/>
+    </class>
+
+
+
+    <class name="Tables.Client"  table="clients" catalog="mytest">
+        <id name="clientNumber" column="clientNumber" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <property name="name" column="name" type="java.lang.String"/>
+        <property name="birthDate" column="birthDate" type="java.util.Date"/>
+    </class>
+
+
+
+
+    <class name="Tables.Transaction" table="transactions">
+        <id name="transactionNumber" column="transactionNumber" type="java.lang.Integer">
+            <generator class="increment"/>
+        </id>
+        <many-to-one name="accountRecipient" column="accountRecipient" class="Tables.Account" lazy="false"/>
+        <many-to-one name="accountSender" column="accountSender" class="Tables.Account" lazy="false"/>
+        <property name="sendedMoney" column="sendedMoney" type="java.lang.Double"/>
+        <property name="sendingDate" column="sendingDate" type="java.util.Date"/>
+
+    </class>
+
+</hibernate-mapping>
